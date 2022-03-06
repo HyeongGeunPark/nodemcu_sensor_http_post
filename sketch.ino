@@ -3,13 +3,19 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
-#define SENSOR_NAME "거실온습도"
+#include "config.h" //설정 파일
+
+#ifndef SENSOR_NAME
+#define SENSOR_NAME "센서 이름 설정"
+#endif
 #define ATTR_NUM 3
 
 /*************** ESP8266 HTTP Client ***********************/
 #include <ESP8266HTTPClient.h>
-#define SERVER_IP "hgparkserver-notebook.duckdns.org:3000"  // test server
-//#define SERVER_IP "https://esp8266-and-heroku-hgpark.herokuapp.com/"  // heroku server dns
+#ifndef SERVER_IP
+#define SERVER_IP "프로토콜://서버 주소"  // test server
+#endif
+
 
 /*************** Temp&Hum Sensor am2320 *********************/
 #include <Wire.h>
@@ -32,8 +38,8 @@ void callback(unsigned char* data, unsigned int length){
 
 /************** WIFI ssid&password *******************/
 #ifndef STASSID
-#define STASSID "sweethome" // ssid of your WIFI AP
-#define STAPSK  "homesweet" // password of your WIFI AP
+#define STASSID "ssid" // ssid of your WIFI AP
+#define STAPSK  "password" // password of your WIFI AP
 #endif
 const char* ssid = STASSID;
 const char* password = STAPSK;
